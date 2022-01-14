@@ -1,18 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-let Post = require('../models/post');
-let posts = Post.getAll()
+let postsCtrl = require('../controllers/posts');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('posts', { posts });
-});
-
-router.post('/new', function(req, res, next) {
-    req.body.id = Math.floor(Math.random()*10000);
-    posts.push(req.body);
-    res.redirect('/posts');
-})
+router.get('/', postsCtrl.index);
+router.get('/new', postsCtrl.new);
+router.post('/', postsCtrl.create);
+router.get('/:id', postsCtrl.show);
 
 module.exports = router;

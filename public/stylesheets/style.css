@@ -16,3 +16,8 @@ a {
 textarea {
   height: 200px;
 }
+
+.all-posts {
+  display: flex;
+  flex-direction: column;
+}

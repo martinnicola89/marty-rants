@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Marty Rants</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p>
+      <a href="/">Home</a>
+      |
+      <a href="/posts/new">New Post</a>
+    </p>
+    <h1>Marty Rants Blog Posts</h1>
+    <div class="all-posts">
+      <% for (let post of posts) { %>
+          <a href="/posts/<%=post.id%>"><%=post.subject%></a>
+      <% } %>
+    </div>
+  </body>
+</html>
