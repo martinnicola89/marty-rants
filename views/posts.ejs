@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Marty Rants</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <h1>Marty Rants Blog</h1>
+    <form action="/posts/new" method="POST">
+        <div class="post-form">
+            <input name="subject" type="text" placeholder="Subject" required>
+            <textarea name="body" type="text" placeholder="Body" required></textarea>
+            <input type="Submit" value="Submit">
+        </div>
+    </form>
+    <% for (let post of posts) { %>
+        <h3><%=post.subject%></h3>
+        <p><%=post.body%></p>
+    <% } %>
+  </body>
+</html>
