@@ -6,10 +6,9 @@ module.exports = {
 }
 
 let Post = require('../models/post');
-let posts = Post.getAll()
 
 function index(req, res, next) {
-    res.render('posts/index', { posts });
+    res.render('posts/index', { posts: Post.getAll() });
 }
 
 function getForm(req, res, next) {
