@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Marty Rants</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p>
+        <a href="/">Home</a>
+        |
+        <a href="/posts">All Posts</a>
+    </p>
+    <h1>New Post</h1>
+    <form action="/posts/<%=post.id%>?_method=PUT" method="POST">
+        <div class="post-form">
+            <input name="subject" type="text" value=<%=post.subject%> required>
+            <textarea name="body" type="text" required><%=post.body%></textarea>
+            <input type="Submit" value="Submit">
+        </div>
+    </form>
+  </body>
+</html>

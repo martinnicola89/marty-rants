@@ -2,6 +2,8 @@ module.exports = {
     getAll,
     getOne,
     create,
+    updateOne,
+    deleteOne
 }
 
 let posts = [
@@ -34,6 +36,16 @@ function getOne(id) {
 }
 
 function create(body) {
-    body.id = Math.floor(Math.random()*10000);
-    posts.push(body);
+
+    console.log(posts);
+}
+
+function updateOne(id, body) {
+    let post = getOne(id);
+    post.subject = body.subject;
+    post.body = body.body;
+}
+
+function deleteOne(id) {
+    posts = posts.filter(post => post.id != parseInt(id))
 }

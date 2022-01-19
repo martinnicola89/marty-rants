@@ -14,5 +14,11 @@
     </p>
     <h3><%=post.subject%></h3>
     <p><%=post.body%></p>
+    <div class="btn-container">
+        <a href="/posts/<%=post.id%>/edit"><button>Edit</button></a>
+      <form action="/posts/<%=post.id%>?_method=DELETE" method="POST">
+        <button>Delete</button>
+      </form>
+    </div>
   </body>
 </html>
