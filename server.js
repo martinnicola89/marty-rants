@@ -2,11 +2,22 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
 var logger = require('morgan');
+var methodOverride = require('method-override');
+
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
+var commentsRouter = require('./routes/comments');
+var aboutRouter = require('./routes/about');
+var tutoringRouter = require('./routes/tutoring');
 var usersRouter = require('./routes/users');
+
+require('./config/database');
+require('./config/passport');
 
 var app = express();
 
@@ -19,18 +30,23 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(methodOverride('_method'));
+app.use(session({
+  secret: 'martyrocks!',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Mounting Routes
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
+app.use('/', commentsRouter);
+app.use('/about', aboutRouter);
+app.use('/tutoring', tutoringRouter);
 app.use('/users', usersRouter);
-
-// Tell the app to listen on port 3000
-// for HTTP requests from clients
-app.listen(3000, function () {
- console.log('Listening on port 3000');
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

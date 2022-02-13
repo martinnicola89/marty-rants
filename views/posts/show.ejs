@@ -1,18 +1,58 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Marty Rants</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <p>
-      <a href="/">Home</a>
-      |
-      <a href="/posts/new">New Post</a>
-      |
-      <a href="/posts">All Posts</a>
-    </p>
-    <h3><%=post.subject%></h3>
-    <p><%=post.body%></p>
-  </body>
-</html>
+<%- include('../partials/header.ejs') %>
+  <!--========== PROMO BLOCK ==========-->
+  <div class="g-bg-position--center js__parallax-window" style="background: url(/img/vancouver.jpeg) no-repeat; text-shadow: 4px 4px 4px #242424;">
+    <div class="g-container--md g-text-center--xs g-padding-y-150--xs">
+      <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white g-letter-spacing--2 g-margin-b-25--xs">Marty Rants</p>
+      <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-50--md g-color--white g-letter-spacing--1">The Ultimate Blog on the Internet</h1>
+    </div>
+  </div>
+  <!--========== END PROMO BLOCK ==========-->
+    <nav class="blog-nav">
+      <a href="/posts"><i class="fa fa-home"></i></a>
+      <% if (user) { %>
+        <% if (user.email === "martinnicola89@gmail.com") { %>
+          |
+          <a href="/posts/new"><i class="fa fa-pencil"></i></a>
+        <% } %>
+      <% } %>
+    </nav>
+    <div class="show-page">
+      <div class="show-container">
+        <h3><%=post.headline%></h3>
+        <img src=<%=post.imgLink%> alt="" />
+        <p><%=post.body%></p>
+        <% if (user.email === "martinnicola89@gmail.com") { %>
+          <div class="showBtn-container">
+            <form action="/posts/<%=post._id%>?_method=DELETE" method="POST">
+              <button>Delete</button>
+            </form>
+            <a href="/posts/<%=post._id%>/edit"><button>Edit</button></a>
+          </div>
+        <% } %>
+        <div class="comment-container">
+          <% if (user) { %>
+            <h2>New Comment</h2>
+            <form action="/posts/<%=post.id%>/comments/new" method="POST">
+              <div class="comment-box">
+                <textarea class="comment-textarea" type="text" name="body"></textarea>
+                <input class="submit-btn" type="submit" value="Send">
+              </div>
+            </form>
+          <% } %>
+          <h2>Comments</h2>
+          <% if (comments.length) { %>
+          <% comments.forEach(comment => { %>
+            <div class="comments-box">
+              <div class="comment-author">from <%=comment.user%> on <%=comment.createdAt.toLocaleString()%></div>
+              <div class="comment-body"><%=comment.body%></div>
+            </div>
+          <% }) %>
+          <% } else { %>
+            <p>No comments yet</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+<%- include('../partials/footer.ejs') %>
+

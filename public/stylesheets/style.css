@@ -21,3 +21,17 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 15%;
+}
+.comment-box input {
+  width: 50px;
+}
